@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quiz_app/models/question.dart';
 import 'package:quiz_app/view/pages/check_answers.dart';
 
+import '../../controllers/quiz_controller.dart';
 import 'home.dart';
 
 class QuizFinishedPage extends StatefulWidget {
@@ -21,16 +22,17 @@ class _QuizFinishedPageState extends State<QuizFinishedPage> {
 
   @override
   Widget build(BuildContext context) {
+    QuizController controller = Get.find<QuizController>();
     int correct = 0;
     this.widget.answers.forEach((index, value) {
-      if (this.widget.questions[index].correctAnswer == value) correct++;
-    });
+      if (this.widget.questions[index].correctAnswer == value) correct++;});
     final TextStyle titleStyle = TextStyle(
         color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.w500);
     final TextStyle trailingStyle = TextStyle(
         color: Theme.of(context).primaryColor,
         fontSize: 20.0,
         fontWeight: FontWeight.bold);
+
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
@@ -109,7 +111,12 @@ class _QuizFinishedPageState extends State<QuizFinishedPage> {
                     backgroundColor: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
                     ),
                     child: Text("Goto Home"),
-                    onPressed: () =>Get.offAll(HomePage()),
+                    onPressed: () {
+                      int c=correct ;
+                      int q=widget.questions.length ;
+                      controller.addpoints(q,c);
+                      Get.offAll(HomePage());
+                    },
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(

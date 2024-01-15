@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:glassmorphism/glassmorphism.dart';
 import 'package:quiz_app/models/category.dart';
 import 'package:quiz_app/view/widgets/quiz_options.dart';
 
@@ -65,7 +68,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         SizedBox(width: 10,),
                         const VerticalDivider(
-                          color: Colors.black,
+                          color: Colors.white,
                           thickness: 1.0,
                         ),
                         const Image(
@@ -76,7 +79,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                          Column(
                           children: [
                             Text('Points',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight:FontWeight.bold ),),
-                            Text('${controller.Points}',style: TextStyle(fontSize: 20,color: Colors.lightBlueAccent,fontWeight:FontWeight.bold ),),
+                            Text('${controller.points.toStringAsFixed(2)}',style: TextStyle(fontSize: 20,color: Colors.lightBlueAccent,fontWeight:FontWeight.bold ),),
                           ],
                         ),
                       ],
@@ -124,19 +127,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildCategoryItem(BuildContext context, int index) {
     Category category = categories[index];
-    return Padding(
-      padding: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 20.0),
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[800],
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            width: 200,
-            height: (index == 0) ? 170 : 220,
-            child: GestureDetector(
-              onTap: () => _categoryPressed(context, category),
+    return GestureDetector(
+      onTap: () => _categoryPressed(context, category),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 20.0),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[800],
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              width: 200,
+              height: (index == 0) ? 170 : 220,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -164,8 +167,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -173,34 +176,112 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   _categoryPressed(BuildContext context, Category category) {
     showModalBottomSheet(
       context: context,
-      builder: (sheetContext) => Container(
-        decoration: const BoxDecoration(
+      builder: (sheetContext) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
-            bottomLeft: Radius.zero,
-            bottomRight: Radius.zero,
           ),
-          // color: Colors.black87,
-
-          image: DecorationImage(
-            image: NetworkImage(
-              "https://c4.wallpaperflare.com/wallpaper/707/220/899/gradient-blue-pink-abstract-art-wallpaper-preview.jpg",
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent, // Set the background color as per your requirement
+              image: DecorationImage(
+                image: NetworkImage(
+                  "https://c4.wallpaperflare.com/wallpaper/707/220/899/gradient-blue-pink-abstract-art-wallpaper-preview.jpg",
+                ),
+                fit: BoxFit.cover,
+              ),
             ),
-            fit: BoxFit.cover,
+            child: BottomSheet(
+              backgroundColor: Colors.transparent,
+              builder: (BuildContext context) {
+                return QuizOptionsDialog(category: category);
+              },
+              onClosing: () {},
+              enableDrag: true,
+              showDragHandle: true,
+              animationController: _animationController,
+            ),
           ),
-        ),
-        child: BottomSheet(
-          backgroundColor: Colors.transparent,
-          builder: (BuildContext context) {
-            return QuizOptionsDialog(category: category);
-          },
-          onClosing: () {},
-          enableDrag: true,
-          showDragHandle: true,
-          animationController: _animationController,
         ),
       ),
     );
   }
+  //
+  // _categoryPressed(BuildContext context, Category category) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (sheetContext) => BackdropFilter(
+  //       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+  //       child: ClipRRect(
+  //         borderRadius: BorderRadius.only(
+  //           topLeft: Radius.circular(20.0),
+  //           topRight: Radius.circular(20.0),
+  //         ),
+  //         child: Container(
+  //           decoration: BoxDecoration(
+  //             gradient: LinearGradient(
+  //               begin: Alignment.topCenter,
+  //               end: Alignment.bottomLeft,
+  //               colors: [
+  //
+  //                Colors.lightBlueAccent,
+  //                 Colors.blueAccent,
+  //                 Colors.lightBlueAccent,
+  //
+  //                 Color(0xFF0099FF), // Light Blue
+  //                 Color(0xFF003366),// Darker Blue
+  //                 Colors.blue,
+  //               ],
+  //             ),
+  //           ),
+  //           child: BottomSheet(
+  //             backgroundColor: Colors.transparent,
+  //             builder: (BuildContext context) {
+  //               return QuizOptionsDialog(category: category);
+  //             },
+  //             onClosing: () {},
+  //             enableDrag: true,
+  //             showDragHandle: true,
+  //             animationController: _animationController,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+// _categoryPressed(BuildContext context, Category category) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (sheetContext) => Container(
+  //       decoration:  BoxDecoration(
+  //        // color:Colors.grey[800],
+  //         borderRadius: BorderRadius.only(
+  //           topLeft: Radius.circular(20.0),
+  //           topRight: Radius.circular(20.0),
+  //           bottomLeft: Radius.zero,
+  //           bottomRight: Radius.zero,
+  //         ),
+  //         image: DecorationImage(
+  //                     image: NetworkImage(
+  //                       "https://c4.wallpaperflare.com/wallpaper/707/220/899/gradient-blue-pink-abstract-art-wallpaper-preview.jpg",
+  //                     ),
+  //                     fit: BoxFit.cover,
+  //                   ),
+  //       ),
+  //       child: BottomSheet(
+  //         backgroundColor: Colors.transparent,
+  //         builder: (BuildContext context) {
+  //           return QuizOptionsDialog(category: category);
+  //         },
+  //         onClosing: () {},
+  //         enableDrag: true,
+  //         showDragHandle: true,
+  //         animationController: _animationController,
+  //       ),
+  //     ),
+  //   );
+  // }
 }

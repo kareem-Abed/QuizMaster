@@ -4,6 +4,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:timer_controller/timer_controller.dart';
@@ -15,7 +16,7 @@ class QuizController extends GetxController{
 
 
   int rank = 20;
-  int Points = 0;
+
 
 
  //question variables
@@ -29,13 +30,21 @@ class QuizController extends GetxController{
   final Map<int, dynamic> answers = {};
   List<dynamic> options = [];
 
+  double points = GetStorage().read('points') ?? 0.0;
+
+
+// Store the double value
 
 
 
 
 
+ void addpoints(int questionsLength,int correct) async {
 
-
+   if(correct!=0) points+= (correct/questionsLength);
+   GetStorage().write('points', points);
+    update();
+  }
 
    questionUpdate() async {
     Question question= questions[currentIndex];
@@ -45,11 +54,6 @@ class QuizController extends GetxController{
     options.shuffle();
     }
   }
-
-
-
-
-
 
   String baseUrl = "https://opentdb.com/api.php";
   Future<List<Question>> getQuestions(Category category, int? total, String? difficulty) async {
@@ -93,9 +97,9 @@ class QuizController extends GetxController{
        timerController.restart();
 
     } else {
+     // Get.replace(QuizFinishedPage(questions: questions, answers: answers));
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (_) => QuizFinishedPage(
-              questions:questions, answers: answers)));
+          builder: (_) => QuizFinishedPage(questions:questions, answers: answers)));
     }
   }
 

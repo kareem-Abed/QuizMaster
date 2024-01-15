@@ -46,6 +46,8 @@ dependencies:
   pie_timer: ^1.2.0
   circular_countdown: ^2.1.0
   timer_controller: ^0.1.0
+  get_storage: ^2.1.1
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

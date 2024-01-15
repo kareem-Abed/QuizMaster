@@ -39,13 +39,13 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller.timerController = TimerController.seconds(20);
+    controller.timerController = TimerController.seconds(40);
     controller.timerController.start();
   }
 
   @override
   void dispose() {
-    controller.timerController.dispose();
+   controller.timerController.dispose();
     super.dispose();
   }
 
@@ -231,13 +231,11 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                                           HtmlUnescape().convert("$option"),
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        groupValue: controller
-                                            .answers[controller.currentIndex],
+                                        groupValue: controller.answers[controller.currentIndex],
                                         value: option,
                                         onChanged: (dynamic value) {
                                           setState(() {
-                                            controller.answers[controller
-                                                .currentIndex] = option;
+                                            controller.answers[controller.currentIndex] = option;
                                           });
                                         },
                                       ),
@@ -250,36 +248,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    // Card(
-                    //   color: Colors.grey[800],
-                    //   child: Column(
-                    //     mainAxisSize: MainAxisSize.min,
-                    //     children: <Widget>[
-                    //       ...controller.options.map((option) =>
-                    //           RadioListTile(
-                    //             activeColor: Colors.green,
-                    //             tileColor: Colors.black.withOpacity(0.1),
-                    //
-                    //             title: Text(
-                    //               HtmlUnescape().convert("$option"),
-                    //   style: TextStyle(color: Colors.white),
-                    //
-                    //
-                    //             ),
-                    //             groupValue: controller.answers[controller.currentIndex],
-                    //             value: option,
-                    //             onChanged: (dynamic value) {
-                    //               setState(() {
-                    //                 controller
-                    //                         .answers[controller.currentIndex] =
-                    //                     option;
-                    //               });
-                    //             },
-                    //
-                    //           )),
-                    //     ],
-                    //   ),
-                    // ),
+
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
@@ -301,8 +270,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                                   fontSize: 25.0, color: Colors.white),
                             ),
                             onPressed: () {
-                              controller.nextSubmit(
-                                  context, controller.questions);
+                              controller.nextSubmit(context, controller.questions);
                               controller.questionUpdate();
                             },
                           ),
@@ -337,17 +305,3 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   }
 }
 
-Widget _button({required String title, VoidCallback? onPressed}) {
-  return Expanded(
-    child: ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.purple),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        title,
-        style: const TextStyle(color: Colors.white),
-      ),
-    ),
-  );
-}
