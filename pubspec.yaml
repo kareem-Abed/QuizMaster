@@ -1,5 +1,5 @@
-name: quiz_app
-description: "A new Flutter project."
+name: QuizMaster
+description: "QuizMaster"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -40,14 +40,12 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   flutter_custom_clippers: ^2.1.0
   html_unescape: ^2.0.0
-  glassmorphism: ^3.0.0
   flutter_staggered_grid_view: ^0.7.0
-  circular_countdown_timer: ^0.2.3
-  pie_timer: ^1.2.0
   circular_countdown: ^2.1.0
   timer_controller: ^0.1.0
   get_storage: ^2.1.1
   dropdown_button2: ^2.3.9
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:

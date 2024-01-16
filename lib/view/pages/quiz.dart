@@ -1,12 +1,11 @@
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+
+import 'package:QuizMaster/view/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:pie_timer/pie_timer.dart';
-import 'package:quiz_app/models/category.dart';
-import 'package:quiz_app/models/question.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:quiz_app/view/pages/quiz_finished.dart';
+
+import 'package:QuizMaster/models/category.dart';
+import 'package:QuizMaster/view/pages/finished.dart';
 import 'package:html_unescape/html_unescape.dart';
 import '../../controllers/quiz_controller.dart';
 import 'package:timer_controller/timer_controller.dart';
@@ -72,7 +71,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            _onWillPop();
+                            controller.quit(context);
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -249,32 +248,34 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.lightBlueAccent,
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                )),
-                            child: Text(
-                              controller.currentIndex ==
-                                      (controller.questions.length - 1)
-                                  ? "Submit"
-                                  : "Next",
-                              style: TextStyle(
-                                  fontSize: 25.0, color: Colors.white),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.lightBlueAccent,
+                                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  )),
+                              child: Text(
+                                controller.currentIndex ==
+                                        (controller.questions.length - 1)
+                                    ? "Submit"
+                                    : "Next",
+                                style: TextStyle(
+                                    fontSize: 25.0, color: Colors.white),
+                              ),
+                              onPressed: () {
+                                controller.nextSubmit(context, controller.questions);
+                                controller.questionUpdate();
+                              },
                             ),
-                            onPressed: () {
-                              controller.nextSubmit(context, controller.questions);
-                              controller.questionUpdate();
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -283,25 +284,6 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     );
   }
 
-  _onWillPop() async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to quit the quiz?'),
-            actions: <Widget>[
-              new TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text('No'),
-              ),
-              new TextButton(
-                onPressed: () => Get.back(),
-                child: new Text('Yes'),
-              ),
-            ],
-          ),
-        )) ??
-        false;
-  }
+
 }
 

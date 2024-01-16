@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:quiz_app/view/pages/home.dart';
-import 'package:quiz_app/controllers/bindings_app.dart';
+import 'package:QuizMaster/view/pages/home.dart';
+import 'package:QuizMaster/controllers/bindings_app.dart';
 import 'dart:convert';
+
+import 'view/pages/splash.dart';
 
 Future<void> main() async {
   await GetStorage.init();
@@ -17,8 +19,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: BilndingsApp(),
-      title: 'Quiz App',
-      home: HomePage(),
+      title: 'Quiz Master',
+      home: SplashScreen(),
     );
   }
 }
