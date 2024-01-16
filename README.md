@@ -52,7 +52,7 @@ Explore the app and have a blast expanding your knowledge! Dive in, play, and ai
 
 | Splash screen | Home screen| options| Quiz screen|Results screen| Answers screen|
 |------|-------|------|-------|------|------|
-| <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/5a0486b3-3e13-403c-a9aa-b1aa7ea28b7f" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/8a1da995-9697-4e2c-bfdb-2422464d60ff" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/b1d7b3ce-3434-45c2-81cf-9b9d6995a7e7" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/611fb37f-0174-4b08-8341-22c71b6628b0" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/d11bc4bc-e314-40d9-ade5-581fd02b71ae" width="200" >|<img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/05e1528c-1e03-4277-a44e-55a9f65a940d" width="120" >|
+| <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/5a0486b3-3e13-403c-a9aa-b1aa7ea28b7f" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/8a1da995-9697-4e2c-bfdb-2422464d60ff" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/b1d7b3ce-3434-45c2-81cf-9b9d6995a7e7" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/611fb37f-0174-4b08-8341-22c71b6628b0" width="200" >|   <img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/d11bc4bc-e314-40d9-ade5-581fd02b71ae" width="200" >|<img src="https://github.com/kareem-Abed/QuizMaster/assets/130121946/05e1528c-1e03-4277-a44e-55a9f65a940d" width="140" >|
 
 
 <div align="center">
